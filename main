@@ -1,0 +1,101 @@
+import os, random
+from random import choice
+import discord
+from discord.ext import commands
+
+
+responses = "Cara", "Escudo"
+
+datazos = "Al nacer tenemos 300 huesos, pero de adulto solo tenemos 206.", "Los búhos son las únicas aves que pueden ver el color azul.", "El orgasmo de un cerdo dura 30 minutos.", "Las ratas se multiplican tan rápidamente que en 18 meses, dos rata pueden llegar a tener 1 millón de hijos", "El creeper nacio a causa de un error de programción", "Una pulga puede saltar une distancia equivalente a 30 veces la longitud de su cuerpo. Para un humano, supondría la longitud de un terreno de fútbol.", "Hay 1,929,770,160,028,800 diferentes combinaciones de color posibles en un cubo de Rubik.", "Los aguacates no son una verdura, son una fruta. ", "En los hospitales de Japón no hay habitaciones con el número 4 ni con el número 9. Esto se debe a que se consideran números de la muerte.", "My name is Yoshikage Kira. I'm 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest. I don't smoke, but I occasionally drink. I'm in bed by 11 PM, and make sure I get eight hours of sleep, no matter what. After having a glass of warm milk and doing about twenty minutes of stretches before going to bed, I usually have no problems sleeping until morning. Just like a baby, I wake up without any fatigue or stress in the morning. I was told there were no issues at my last check-up. I'm trying to explain that I'm a person who wishes to live a very quiet life. I take care not to trouble myself with any enemies, like winning and losing, that would cause me to lose sleep at night. That is how I deal with society, and I know that is what brings me happiness. Although, if I were to fight I wouldn't lose to anyone.", "La Torre Eiffel es casi 15 cm más alta durante el verano.", "Se debe a la expansión térmica. Al calentarse el hierro, las partículas generan energía cinética, ocupando más espacio.", "La única parte del cuerpo que no puede curarse por sí misma son los dientes. Esto se debe a que están cubiertos de esmalte, y no de un tejido vivo.", "El elefante es el único animal con 4 rodillas. Eso sí, no tienen codos.", "¿Te has preguntado alguna vez cuanto aguantarías sin comer ni beber? La respuesta un mes sin comer, siete días sin agua, en promedio.", "Los humanos son los únicos animales capaces de ruborizarse.", "Esa preciosa etapa, a la que conocemos como “enamoramiento”, tan solo dura tres meses. Después, empezamos a demostrar nuestra verdadera cara, y conseguimos ver tanto lo bueno como lo malo de la otra persona.", "No bro, a quien te gusta no le gustas, y a quien le gustas no te gusta", "Esa preciosa etapa, a la que conocemos como “enamoramiento”, tan solo dura tres meses. Después, empezamos a demostrar nuestra verdadera cara, y conseguimos ver tanto lo bueno como lo malo de la otra persona.", "Hitler jamás subió a la Torre Eiffel por flojera.", "Los egipcios antiguos dormían en almohadas hechas de piedra. ¿Te imaginas un almohadazo?", "La Antartida cuenta con el 70 porciento del agua fresca de la tierra.", " Nuestro aroma es tan único como nuestras huellas digitales Cada persona tiene su aroma único, debido a las feromonas. Excepto los gemelos idénticos, que tienen exactamente el mismo olor.", "El calor corporal es más de lo que imaginas En 30 minutos, el cuerpo humano libera suficiente calor como para hervir casi medio litro de agua."
+
+intents = discord.Intents.default()
+intents.message_content = True
+
+bot = commands.Bot(command_prefix='$', intents=intents)
+
+client = discord.Client(intents=intents) 
+
+@client.event
+async def on_ready():
+    print(f'Hemos iniciado sesión como {client.user}')
+
+@bot.event
+async def on_ready():
+    print(f'We have logged in as {bot.user}')
+
+@bot.command()
+async def hello(ctx):
+    await ctx.send(f'Hola, soy un bot {bot.user}!')
+
+@bot.command()
+async def heh(ctx, count_heh = 5):
+    await ctx.send("he" * count_heh)
+
+@bot.command()
+async def moneda(ctx):
+    await ctx.send(f"{random.choice(responses)}")
+
+@bot.command()
+async def curiosidad(ctx):
+    await ctx.send(f"{random.choice(datazos)}")
+
+@bot.command()
+async def restas(ctx):
+    await ctx.send("La resta o la sustracción es una operación aritmética que se representa con el signo; representa la operación de eliminación de objetos de una colección.")
+
+@bot.command()
+async def multiplicacion(ctx):
+    await ctx.send("la multiplicación es una operación binaria y derivada de la suma que se establece en un conjunto numérico.​")
+
+@bot.command()
+async def division(ctx):
+    await ctx.send("En la matemática, la división es una operación parcialmente definida en el conjunto de los números enteros.​")
+
+@bot.command()
+async def joined(ctx, member: discord.Member):
+    """Says when a member joined."""
+    await ctx.send(f'{member.name} joined {discord.utils.format_dt(member.joined_at)}')
+
+@bot.command()
+
+async def meme(ctx):
+
+    img_name = random.choice(os.listdir("carpeta"))
+
+    with open(f'carpeta/{img_name}', 'rb') as f:
+
+            picture = discord.File(f)
+
+  
+
+    await ctx.send(file=picture)
+
+
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+    if message.content.startswith('Hello'):
+        await message.channel.send("Hi!")
+    if message.content.startswith('hello'):
+        await message.channel.send("Hi!")    
+    if message.content.startswith("Hola"):
+        await message.channel.send("Que onda!")
+    if message.content.startswith("hola"):
+        await message.channel.send("Que onda!")
+    if message.content.startswith('bye'):
+        await message.channel.send("Sayonara!")
+    if message.content.startswith("chao"):
+        await message.channel.send("Adieu!")
+    if message.content.startswith ("XD"):
+        await message.channel.send("XDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+    if message.content.startswith('@Usuario1'):
+        await message.channel.send("aparecete")
+    if message.content.startswith('@usuario2'):
+        await message.channel.send("Te invoco")
+    if message.content.startswith('@usuario3'):
+        await message.channel.send("Sal de ahí")
+        
+    else:
+        await message.channel.send("")
